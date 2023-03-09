@@ -9,10 +9,22 @@ namespace Tests.Tests
 {
     public class MetricBmiCalculatorTest
     {
+        public static IEnumerable<object[]> GetSampleCorrectData()
+        {
+            yield return new object[] { 100, 170, 34.6 };
+            yield return new object[] { 77, 160, 30.08 };
+            yield return new object[] { 90, 190, 24.93 };
+        }
+        public static IEnumerable<object[]> GetSampleInCorrectData()
+        {
+            yield return new object[] { 0, 190 };
+            yield return new object[] { -6, 150 };
+            yield return new object[] { 67, -90 };
+            yield return new object[] { 0, 0 };
+            yield return new object[] { -20, -21 };
+        }
         [Theory]
-        [InlineData(100, 170, 34.6)]
-        [InlineData(77, 160, 30.08)]
-        [InlineData(90, 190, 24.93)]
+        [MemberData(nameof(GetSampleCorrectData))]
         public void CalculateBmi_ForGivenWeightAndHeight_ReturnsCorrectBmi(double weight, double height, double bmiResult)
         {
             //arrange 
@@ -24,11 +36,7 @@ namespace Tests.Tests
         }
 
         [Theory]
-        [InlineData(0, 190)]
-        [InlineData(-6, 150)]
-        [InlineData(67, -90)]
-        [InlineData(0, 0)]
-        [InlineData(-20, -21)]
+        [MemberData(nameof(GetSampleInCorrectData))]
         public void CalculateBmi_ForInvalidArguments_ThrowsArgumentException(double weight, double height)
         {
             //arrange 
