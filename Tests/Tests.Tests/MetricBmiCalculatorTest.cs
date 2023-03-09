@@ -22,5 +22,21 @@ namespace Tests.Tests
             //assert
             Assert.Equal(bmiResult, result);
         }
+
+        [Theory]
+        [InlineData(0, 190)]
+        [InlineData(-6, 150)]
+        [InlineData(67, -90)]
+        [InlineData(0, 0)]
+        [InlineData(-20, -21)]
+        public void CalculateBmi_ForInvalidArguments_ThrowsArgumentException(double weight, double height)
+        {
+            //arrange 
+            MetricBmiCalculator calculator = new MetricBmiCalculator();
+            //act
+            Action action = () => calculator.CalculateBmi(weight, height);//delegata
+            //assert
+            Assert.Throws<ArgumentException>(action);
+        }
     }
 }
