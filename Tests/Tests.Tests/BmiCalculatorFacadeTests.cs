@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 using Tests.Model;
 using FluentAssertions;
 using Moq;
+using Xunit.Abstractions;
 
 namespace Tests.Tests
 {
     public class BmiCalculatorFacadeTests
     {
+        public BmiCalculatorFacadeTests(ITestOutputHelper outputHelper)
+        {
+            _outputHelper = outputHelper;
+        }
         private const string OVERWEIGHT_SUMMARY = "You are bit overweight";
+        private readonly ITestOutputHelper _outputHelper;
         [Theory]
         [InlineData(BmiClassification.Overweight, OVERWEIGHT_SUMMARY)]
         public void GetResult_ForValidInputs_ReturnsCorrectSummary(BmiClassification bmiClassification, string expectedResult)
@@ -23,6 +29,7 @@ namespace Tests.Tests
             var bmiCalculatorFacade = new BmiCalculatorFacade(UnitSystem.Metric, bmiDeterminatorMock.Object);
             //act
             BmiResult result = bmiCalculatorFacade.GetResult(1, 1);
+            _outputHelper.WriteLine($"For classification: {bmiClassification} the result is: {result.Summary}");
             //assert
             //assert  
             //Assert.Equal(24.93, result.Bmi);
