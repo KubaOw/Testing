@@ -1,5 +1,6 @@
 ﻿using Tests.Model;
 using Tests;
+Console.WriteLine("hello");
 
 /*
 Console.WriteLine("Please give me your weight");
