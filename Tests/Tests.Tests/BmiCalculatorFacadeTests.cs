@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tests.Model;
+using FluentAssertions;
 
 namespace Tests.Tests
 {
@@ -20,9 +21,13 @@ namespace Tests.Tests
             //act
             BmiResult result = bmiCalculatorFacade.GetResult(weight, height);
             //assert
-            Assert.Equal(24.93, result.Bmi);
-            Assert.Equal(BmiClassification.Overweight, result.BmiClassification);
-            Assert.Equal(OVERWEIGHT_SUMMARY, result.Summary);
+            //assert  
+            //Assert.Equal(24.93, result.Bmi);
+            //Assert.Equal(BmiClassification.Overweight, result.BmiClassification);
+            //Assert.Equal(OVERWEIGHT_SUMMARY, result.Summary);
+            result.Bmi.Should().Be(24.93);
+            result.BmiClassification.Should().Be(BmiClassification.Overweight);
+            result.Summary.Should().Be(OVERWEIGHT_SUMMARY);
 
         }
     }
