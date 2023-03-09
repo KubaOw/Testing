@@ -7,7 +7,7 @@ using Tests.Model;
 
 namespace Tests
 {
-    public class BmiDeterminator
+    public class BmiDeterminator : IBmiDeterminator
     {
         public BmiClassification DeterminateBmi(double bmi) => bmi switch
         {
