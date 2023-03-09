@@ -8,7 +8,7 @@ using Tests.Model;
 
 namespace Tests
 {
-    internal class BmiCalculatorFacade
+    public class BmiCalculatorFacade
     {
         private readonly UnitSystem _unitSystem;
         private readonly IBmiCalculator _bmiCalculator;
